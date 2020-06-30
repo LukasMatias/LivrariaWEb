@@ -30,7 +30,7 @@
                         pst.setString(4, publicacao);
                         pst.setString(5, descricao);
                         pst.executeUpdate();
-                       
+                       // pst.clearParameters(); Limpa os parametros e não salva no banco.
             }catch(Exception ex){
                 ex.printStackTrace();
             }finally{
