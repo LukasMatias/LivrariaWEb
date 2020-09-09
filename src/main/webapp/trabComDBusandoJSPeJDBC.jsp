@@ -20,6 +20,7 @@
             <thead>
                 <tr>
                     <th>ISBN</th><th>Titulo</th>
+                    <th>Excluir</th><th>Atualizar</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +39,16 @@
                 <tr>
                     <td><%= rs.getString("isbn")%></td>
                     <td><%= rs.getString("titulo")%></td>
+                    <td>
+                        <a href="excluindoDB.jsp?isbn=<%= rs.getString("isbn") %>" >
+                        Clique aqui
+                        </a>
+                    </td>
+                    <td>
+                        <a href="atDB.jsp?isbn=<%= rs.getString("isbn") %>" >
+                        Clique aqui
+                        </a>
+                    </td>
                 </tr>
                 <%
                         }

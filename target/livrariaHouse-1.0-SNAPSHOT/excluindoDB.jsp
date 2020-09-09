@@ -4,14 +4,40 @@
     Author     : lukas
 --%>
 
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Exclusão de Livro</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%
+            String isbn = request.getParameter("isbn");
+            if(isbn != null){
+                Connection conn = null;
+                Statement st = null;
+                
+                try{
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/livraria?useUnicode=yes&characterEncoding=UTF-8&useTimezone=true&serverTimezone=UTC", "root", "");
+                        st = conn.createStatement();
+                        
+                        st.executeUpdate("DELETE FROM livros WHERE isbn='"+isbn+"'");
+                        out.println("O livro de ISBN <strong>" + isbn + "</strong> foi excluído com sucesso!");
+                        
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                    out.print("ERRO ao excluir");
+                } finally {
+                    if (st != null) st.close();
+                    if(conn != null) conn.close();
+                }
+            }
+        %>
     </body>
 </html>
